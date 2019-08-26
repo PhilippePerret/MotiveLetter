@@ -8,14 +8,16 @@ class Paragraph
   class << self
 
     attr_reader :tables_mots
+    attr_accessor :lastId
+
     def init
       @tables_mots  = {}
-      @lastId       = 0
+      self.lastId   = 0
     end
 
     # Retourne un identifiant unique
     def newId
-      @lastId += 1
+      self.lastId += 1
     end
 
     # Méthode qui compare la table des mots aux tables
@@ -91,9 +93,28 @@ class Paragraph
 
   attr_reader :contenu, :id, :affinite, :similarite
 
-  def initialize contenu
+  # Instanciation du paragraphe
+  # Lorsqu'il vient d'une lettre de motivation, seul le contenu est défini
+  # Dans le cas contraire, +data+ contient les données initiales, dont l'id.
+  def initialize contenu, data = nil
     @contenu  = contenu
-    @id       = self.class.newId
+    if data.nil?
+      @id = self.class.newId
+    else
+      @id = data[:id]
+      if @id > Paragraph.lastId
+        Paragraph.lastId= @id
+      end
+    end
+  end
+
+  # Méthode de traitement du paragraphe, qu'il vienne du fichier YAML ou
+  # d'une lettre de motivation
+  def treate
+    calc_affinite_et_similarite || return
+    DBFile.add("INSERT INTO extraits (contenu, affinite, similarite) VALUES (\"#{contenu}\", #{affinite}, #{similarite});")
+    JSParagFile.add(self)
+    DataParagFile.add(self)
   end
 
   def calc_affinite_et_similarite
@@ -107,9 +128,21 @@ class Paragraph
   # Retourne les données du paragraphe pour la donnée javascript
   def js_data
     @js_data ||= begin
-      d = {id:id, contenu:contenu, grpAffinite:affinite, similarite:similarite}.to_json
-      "PARAGRAPHS.push(new Paragraph(#{d}));\n\n"
+      "PARAGRAPHS.push(new Paragraph(#{hdata.to_json}));\n\n"
     end
+  end
+
+  def yaml_data
+    @yaml_data ||= hdata
+  end
+
+  def hdata
+    @hdata ||= {
+      id:id,
+      contenu: contenu,
+      grpAffinite:affinite,
+      similarite:similarite
+    }
   end
 
   def table_mots

@@ -6,7 +6,8 @@ begin
   builder = Builder.current
   builder.init
   builder.run
-
+  
+  # Après l'opération, on fait le rapport
   LMFile.report
   builder.report
 

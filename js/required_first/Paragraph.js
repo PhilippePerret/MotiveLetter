@@ -82,9 +82,9 @@ class Paragraph {
   **/
   static onClickParag(ev){
     const my = this
-    if ( my.currentParag ) my.currentParag.div.removeClass('selected')
+    if ( my.currentParag ) my.currentParag.removeClass('selected')
     const parag = my.get(parseInt($(ev.currentTarget).data('id'),10))
-    parag.div.addClass('selected')
+    parag.addClass('selected')
     parag.showSimilaires()
     my.currentParag = parag
   }
@@ -99,6 +99,12 @@ class Paragraph {
     this.data = data
   }
 
+  addClass(css){
+    this.jqObj.addClass(css)
+  }
+  removeClass(css){
+    this.jqObj.removeClass(css)
+  }
   // Affiche les similaires du paragraphe courant
   showSimilaires(){
     const my = this
@@ -135,8 +141,11 @@ class Paragraph {
     if (this.nombre_similaires > 1) {
       var simi = ''
       if (this.similarite < 100) { simi += `${this.similarite}% de `}
-      // simi += String(this.nombre_similaires)
-      simi += String(this.grpAffinite)
+      if (this.isReferent){
+        simi += String(this.nombre_similaires)
+      } else {
+        simi += String(this.grpAffinite)
+      }
       divBloc.append(Dom.createSpan({class:'simi', text:simi}))
     }
     return divBloc
@@ -156,4 +165,5 @@ class Paragraph {
   get isReferent()  {return this.grpAffinite === this.id && this.similarite === 100}
 
   get domId()       {return `par-${this.id}`}
+  get jqObj()       {return $(`#${this.domId}`)}
 }

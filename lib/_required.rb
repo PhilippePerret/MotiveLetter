@@ -1,6 +1,7 @@
 # encoding: UTF-8
 require 'fileutils'
 require 'json'
+require 'yaml'
 
 THISFOLDER = File.dirname(__FILE__)
 APPFOLDER = File.dirname(THISFOLDER)
