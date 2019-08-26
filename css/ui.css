@@ -1,0 +1,46 @@
+body {
+  display: grid;
+  grid-template-columns: auto 25% 25%;
+  grid-template-rows:    auto;
+  min-height: 600px;
+}
+body section#section-lettre {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
+}
+body section#section-lettre div#lettre {
+  border: 2px solid blue;
+  background-color: #EEEEFF;
+  border-radius: 0.4em;
+  min-height: 800px;
+  z-index: 1;
+  padding: 3em;
+  text-align: justify;
+  font-size: 14.5pt;
+}
+div#lettre .par {
+  margin-bottom: 1em;
+}
+
+body section#section-paragraphes {
+  grid-column: 2;
+  grid-row: 1;
+  background-color: grey;
+}
+body section#section-paragraphes div#paragraphs,
+body section#section-tools div#similaires
+{
+  z-index: 50;
+}
+
+body section#section-tools {
+  grid-column:3;
+  grid-row:1;
+  background-color: #7c4cd8;
+}
+
+
+.ui-droppable-hover {
+  border-color: red;
+}

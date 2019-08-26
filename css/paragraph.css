@@ -1,0 +1,66 @@
+div#paragraphs, div#similaires {
+  padding: 1em;
+  max-height: 800px;
+  overflow: auto;
+}
+
+div.par div.infos {
+  padding: 1px 7px;
+  font-family: 'Courier New', Courier;
+  background-color: #c88f8f;
+  color: #fffa44;
+  float: right;
+  margin-right: -22px;
+  margin-top: -10px;
+}
+div.par div.infos span.id {
+  margin-right: 4px;
+  visibility: hidden;
+}
+div.par:hover div.infos span.id {
+  visibility: visible;
+}
+
+#lettre div.par {
+  text-indent: 1.4em;
+}
+/* Masquer le bloc d'infos */
+#lettre div.par div.infos {
+  display:none;
+}
+
+.par {
+  border: 2px solid transparent;
+}
+/* Le paragraphe quand il est sélectionné */
+.par.selected {
+  border-color: white;
+  background-color: #C8C8C8;
+}
+#lettre .par.selected {
+  border-color:transparent;
+  background-color:inherit;
+}
+
+/* La boite d'information et d'outils */
+.par div.infos {
+  float: right;
+  font-size: 8.5pt;
+}
+/*
+  Un paragraphe dans la liste où ils sont tous là
+ */
+div#paragraphs .par, div#similaires .par, body > .par {
+  font-size: 10.9pt;
+  padding:1em;
+  margin-bottom:1em;
+  border-radius: 0.4em;
+  z-index: 50;
+  max-width: 300px;
+}
+div#paragraphs .par:not(.selected),
+div#similaires .par:not(.selected),
+body > .par:not(.selected)
+{
+  background-color: white;
+}
