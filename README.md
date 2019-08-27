@@ -89,7 +89,8 @@ Attention, ce faisant, de ne pas corrompre les données. Le mieux, en l'occurenc
 
 Après toute modification, cependant, il ne faut pas oublier de relancer le script `runner.rb` pour actualiser les résultats : `ruby /path/to/runner.rb` dans votre console.
 
-## Les lettres traitées {#lettres_traiteds}
+<a name="lettres_traiteds"/>
+## Les lettres traitées
 
 Après avoir été traitées, les lettres données en exemple — dont on a extrait les paragraphes au départ — sont placées dans le dossier `originales_traiteds` pour ne pas être traitées deux fois.
 
