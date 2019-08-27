@@ -18,6 +18,26 @@ class Paragraph {
     return this.items[par_id]
   }
 
+  static getFromDom(jqObj){
+    return this.get(parseInt($(jqObj).data('id'),10))
+  }
+
+  /**
+    | Pour exécuter une fonction sur tous les paragraphes référents
+  **/
+  static forEachReferent(fct){
+    const my = this
+    for(var aff in my.byAffinites){
+      var referent = my.byAffinites[aff].referent
+      try {
+        fct(referent)
+      } catch (e) {
+        console.error("Problème avec le paragraphe référent ", referent)
+        console.error(e)
+      }
+    }
+  }
+
   /**
     | Construction de la liste de tous les paragraphes.
     | Ils sont placés dans deux listes :
@@ -64,6 +84,46 @@ class Paragraph {
     my.observe()
   }
 
+  /**
+    Initialiser la recherche
+  **/
+  static resetSearch(){
+    $('#search-field').val('')
+    UI.paragraphs.showAll()
+  }
+  /**
+    Appelé pour faire une recherche ou l'annuler
+  **/
+  static onSearch(){
+    const my = this
+    const searched = $('#search-field').val().trim();
+    if ( searched == '' ) {
+      // <= Pas de recherche demandée
+      // => Il faut réafficher tous les paragraphes
+      UI.paragraphs.showAll()
+    } else {
+      // <= Une recherche est spécifiée
+      // => Il faut afficher tous les paragraphes correspondants
+
+      let searchedWords = searched.split(' ');
+      // Sauf s'il faut faire une recherche case sensitive, on met les
+      // mots en minuscule
+      searchedWords = searchedWords.map(w => w.toLowerCase())
+
+      // console.log("Mots cherchés : ", searchedWords)
+      var nombre_founds = 0
+      my.forEachReferent(parag => {
+        if ( parag.contains(searchedWords) ){
+          parag.show()
+          nombre_founds ++;
+        } else {
+          parag.hide()
+        }
+      })
+      $('#search-results').html(`Nombre de résultats : ${nombre_founds}`)
+    }
+  }
+
   // Retourne le nombre d'items par affinité pour l'affinité +affinite+
   static nombreOfAffinite(affinite){
     return this.byAffinites[affinite].count
@@ -99,12 +159,28 @@ class Paragraph {
     this.data = data
   }
 
+  // Affiche le paragraphe (quand il a été masqué)
+  show(){this.jqObj.show()}
+  // Masque le paragraphe
+  hide(){this.jqObj.hide()}
+
   addClass(css){
     this.jqObj.addClass(css)
   }
   removeClass(css){
     this.jqObj.removeClass(css)
   }
+
+  // Retourne true si le paragraphe contient les mots +words+
+  contains(words, options){
+    const contenuMin = this.contenu.toLowerCase()
+    for ( var word of words ){
+      if ( ! contenuMin.match(word) ) return false
+    }
+    // console.log("Le paragraphe « %s » contient %s ", this.contenu, words.join(', '))
+    return true
+  }
+
   // Affiche les similaires du paragraphe courant
   showSimilaires(){
     const my = this

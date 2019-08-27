@@ -13,5 +13,5 @@ $(document).ready(function(){
   UI.similaires.jqObj.sortable({
     connectWith: ".connectedParagraphs"
   }).disableSelection();
-
+  
 }) // Fin de ready

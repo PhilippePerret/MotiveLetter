@@ -44,3 +44,91 @@ body section#section-tools {
 .ui-droppable-hover {
   border-color: red;
 }
+
+
+/*
+
+  Champ pour faire une recherche
+
+ */
+ div#div-search {
+   background-color: #EEEEEE;
+ }
+
+ div#div-search input#search-field {
+   width: 98%;
+ }
+
+ div#div-search span#search-results {
+   font-size: 9pt;
+   padding-left:1em;
+ }
+
+ textarea#clipboard-field {
+   width: 94%;
+   height: 400px;
+ }
+
+ /* ---------------------------------------------------------------------
+  Les dialogues
+
+  */
+.dialog {
+  position: fixed;
+  left: 30%;
+  top: 15%;
+  min-width: 200px;
+  max-width: 400px;
+  display: grid;
+  grid-template-columns: auto auto 50px;
+  grid-template-rows: auto auto auto;
+  z-index: 1000;
+  background-color: #EEEEEE;
+  font-family: Arial, Helvetica;
+  box-shadow: 2px 2px 23px #585757;
+}
+.dialog div.title {
+  grid-column: 1/4;
+  grid-row:1;
+  background-color: #555555;
+  color: white;
+  font-weight: bold;
+  font-family: Arial, Helvetica, Geneva;
+  padding: 4px 18px;
+}
+
+.dialog img.icon {
+  grid-column: 1;
+  grid-row: 2;
+  width: 70px;
+  padding: 10px;
+}
+
+.dialog div.message {
+  grid-column: 2/4;
+  grid-row: 2;
+  padding: 2em;
+  /* border: 1px dashed green; */
+}
+
+.dialog div.buttons {
+  grid-column: 2/4;
+  grid-row: 3;
+  text-align: right;
+  padding: 1em 1.5em;
+}
+.dialog div.buttons button {
+  font-family: inherit;
+  font-size: inherit;
+  min-width: 60px;
+}
+
+/*  ---------------------------------------------------------------------
+
+Les boutons pour copier
+
+*/
+div#boutons-lettre span {
+  font-size: 10pt;
+  font-family: Arial, Helvetica;
+}

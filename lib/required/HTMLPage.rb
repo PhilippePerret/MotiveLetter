@@ -46,15 +46,29 @@ TEMPLATE_HTML = <<-HTML
 
 
     <section id="section-lettre">
+      <div id="boutons-lettre">
+        <span id="copier">Copier</span>
+        <button id="btn-toggle-clipboard-field" type="button" onclick="LM.closeTextarea.call(LM)" class="hidden fright">Fermer</button>
+        <button type="button" onclick="LM.copyTexteOrIds.call(LM, false)">Texte</button>
+        <button type="button" onclick="LM.copyTexteOrIds.call(LM, true)">liste IDs</button>
+        <textarea id="clipboard-field" class="hidden"></textarea>
+      </div>
       <div id="lettre" class="connectedParagraphs"></div>
     </section>
 
 
 
     <section id="section-paragraphes">
-      <div id="div-search">
 
+      <div id="div-search">
+        <input type="text" id="search-field" value="">
+        <div>
+          <span id="search-results" class=""></span>
+          <button type="button" class="fright" onclick="Paragraph.onSearch.call(Paragraph)">Filtrer</button>
+          <button type="button" class="fright" onclick="Paragraph.resetSearch.call(Paragraph)">Reset</button>
+        </div>
       </div>
+
       <div id="paragraphs" class="connectedParagraphs">
 
       </div>
