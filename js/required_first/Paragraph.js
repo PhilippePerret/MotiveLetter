@@ -90,6 +90,7 @@ class Paragraph {
   static resetSearch(){
     $('#search-field').val('')
     UI.paragraphs.showAll()
+    $('#search-results').html('')
   }
   /**
     Appelé pour faire une recherche ou l'annuler
@@ -100,7 +101,7 @@ class Paragraph {
     if ( searched == '' ) {
       // <= Pas de recherche demandée
       // => Il faut réafficher tous les paragraphes
-      UI.paragraphs.showAll()
+      this.resetSearch()
     } else {
       // <= Une recherche est spécifiée
       // => Il faut afficher tous les paragraphes correspondants
@@ -113,6 +114,8 @@ class Paragraph {
       // console.log("Mots cherchés : ", searchedWords)
       var nombre_founds = 0
       my.forEachReferent(parag => {
+        // On n'applique pas le filtre aux paragraphes de la lettre
+        if ( parag.isUsed() ) return
         if ( parag.contains(searchedWords) ){
           parag.show()
           nombre_founds ++;
@@ -158,6 +161,11 @@ class Paragraph {
   constructor(data){
     this.data = data
   }
+
+  // Retourne true si le paragraphe n'est pas utilisé dans la
+  // lettre
+  isUnused(){ return !this.isUsed() }
+  isUsed(){ return this.jqObj.parent().attr('id') == 'lettre' }
 
   // Affiche le paragraphe (quand il a été masqué)
   show(){this.jqObj.show()}

@@ -14,7 +14,6 @@ const LM = {
   }
 
 , addInDom(parag){
-    console.log("Ajouter le paragraphe ", parag.jqObj)
     UI.lettre.append(parag.jqObj)
   }
 
@@ -25,7 +24,6 @@ const LM = {
     partir de ces identifiants
   **/
 , prepare(){
-    console.log("-> prepare", CURRENT_LM)
     if ( 'undefined' === typeof CURRENT_LM ) return
     CURRENT_LM.forEach( paragId => this.addInDom(Paragraph.get(paragId)))
   }

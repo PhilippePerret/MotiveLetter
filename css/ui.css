@@ -78,7 +78,7 @@ body section#section-tools {
   left: 30%;
   top: 15%;
   min-width: 200px;
-  max-width: 400px;
+  max-width: 500px;
   display: grid;
   grid-template-columns: auto auto 50px;
   grid-template-rows: auto auto auto;

@@ -4,11 +4,20 @@ Petite application de bureautique pour construire ses lettres de motivation à p
 
 Créée pour Marion.
 
-## Pré-requis
+* [Pré-requis](#prerequis)
+* [Utilisation](#utilisation)
+* [Construction de la lettre (de motivation ou autre)](#build_letter)
+* [Récupération du texte final de la lettre](#recup_texte_final)
+* [Travail de la lettre sur plusieurs jours](#work_several_days)
+* [Indice/pourcentage de similarité](#similarite)
+* [Modification des paragraphes](#modify_paragraphs)
+* [Les lettres traitées](#lettres_traiteds)
+
+## Pré-requis {#prerequis}
 
 Pour fonctionner, l'application a besoin que le langage [ruby](https://www.ruby-lang.org/fr/documentation/installation/) soit correctement installé sur la machine.
 
-## Utilisation
+## Utilisation {#utilisation}
 
 * Mettre des lettres de motivations dans le dossier `originales`. Elles doivent se trouver au format `.doc`, `.docx` ou `.odt` (LibreOffice) (note : elles peuvent se trouver dans des sous-dossiers du dossier `originales`),
 
@@ -16,7 +25,7 @@ Pour fonctionner, l'application a besoin que le langage [ruby](https://www.ruby-
 
 * ouvrir la page `LM_BUILDER.HTML` dans un navigateur et constuire sa lettre de motivation (cf. ci-dessous).
 
-## Construction de la lettre (de motivation ou autre)
+## Construction de la lettre (de motivation ou autre) {#build_letter}
 
 « Construire une lettre » consiste à choisir des paragraphes par rapport à des exemples de paragraphes, en différentes versions (rassemblées par proximités) et à les agencer dans l'ordre le plus pertinent.
 
@@ -34,13 +43,13 @@ Choisir le paragraphe voulu — référent ou similaire — et le glisser à l
 
 Dans la lettre — la colonne gauche — on peut modifier l'ordre des paragraphes simplement en les déplaçant à la souris.
 
-## Récupération du texte final de la lettre
+## Récupération du texte final de la lettre {#recup_texte_final}
 
 Pour récupérer le texte de la lettre finale, il suffit de cliquer sur le bouton "Copier \[Texte\]" en haut de la lettre (colonne gauche).
 
 Si votre ordinateur/navigateur le permet, le texte sera entièrement copié dans le presse-papier et vous pourrez le copier où vous voulez. Si votre navigateur est trop ancien, le texte sera placé dans un champ de saisie que vous pourrez copier-coller de la même manière.
 
-## Travail de la lettre sur plusieurs jours
+## Travail de la lettre sur plusieurs jours {#work_several_days}
 
 Si vous voulez travailler la lettre sur plusieurs jours, sans avoir à la recontruire chaque fois, voici la démarche à suivre :
 
@@ -53,13 +62,13 @@ Lorsque vous rechargerez la page `LM_BUILDER.HTML` à votre prochaine session, v
 
 > Note : après avoir travaillé une lettre, vous pouvez mettre de côté cette liste d'identifiants de paragraphes, en indiquant à quelle lettre ça correspond, pour repartir de ce modèle de lettre une prochaine fois, simplement en copiant-collant cette liste au bout de `const CURRENT_LM = ` !
 
-## Indice/pourcentage de similarité
+## Indice/pourcentage de similarité {#similarite}
 
 Lorsque vous cliquez sur un paragraphe référent (liste centrale), vous affichez les paragraphes similaires dans la colonne droite (s'il y en a). Sur ces paragraphes similaires, en haut à droite, vous trouvez un *indice/pourcentage de similarité*.
 
 Plus cet indice se rapproche de `100` (« 100 % ») et plus le paragraphe est proche, identique, au paragraphe référent. Inversement, plus il est petit et moins le paragraphe est similaire à son référent, plus c'est un paragraphe différent.
 
-## Modification des paragraphes
+## Modification des paragraphes {#modify_paragraphs}
 
 Les paragraphes peuvent être modifiés, détruits ou remplacés dans le fichier `data_paragraphes.yml` à la racine du dossier. Pour modifier un texte d'un paragraphe, il suffit de… modifier ce texte dans ce fichier.
 
@@ -69,10 +78,24 @@ Attention, ce faisant, de ne pas corrompre les données. Le mieux, en l'occurenc
 
 Après toute modification, cependant, il ne faut pas oublier de relancer le script `runner.rb` pour actualiser les résultats : `ruby /path/to/runner.rb` dans votre console.
 
-## Les lettres traitées
+## Les lettres traitées {#lettres_traiteds}
 
-Après avoir été traitées, les lettres données en exemple — dont on a extrait les paragraphes au départ — sont placées dans le dossier `originales_traiteds` pour ne pas être traitées deux fois. 
+Après avoir été traitées, les lettres données en exemple — dont on a extrait les paragraphes au départ — sont placées dans le dossier `originales_traiteds` pour ne pas être traitées deux fois.
 
 ## Enjoy!
 
 Amusez-vous bien !
+
+## Versions
+
+### 1.1.0
+
+* Vérification de la validité des informations. Des lettres doivent avoir été traitées pour que la construction soit possible.
+
+### 1.0.3
+
+* Le filtre des paragraphes n'est plus appliqué aux paragraphes de la lettre.
+
+### 1.0.2
+
+Première version complète.

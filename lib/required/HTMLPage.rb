@@ -61,7 +61,7 @@ TEMPLATE_HTML = <<-HTML
       <div id="div-search">
         <input type="text" id="search-field" value="">
         <div>
-          <span id="search-results" class=""></span>
+          <span id="search-results"></span>
           <button type="button" class="fright" onclick="Paragraph.onSearch.call(Paragraph)">Filtrer</button>
           <button type="button" class="fright" onclick="Paragraph.resetSearch.call(Paragraph)">Reset</button>
         </div>
@@ -82,7 +82,7 @@ TEMPLATE_HTML = <<-HTML
 
     __SCRIPTS__
     <script type="text/javascript" src="js/_current_lm_.js"></script>
-    
+
   </body>
 </html>
 HTML
