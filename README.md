@@ -14,11 +14,15 @@ Créée pour Marion.
 * [Modification des paragraphes](#modify_paragraphs)
 * [Les lettres traitées](#lettres_traiteds)
 
-## Pré-requis {#prerequis}
+<a name="prerequis"></a>
+
+## Pré-requis
 
 Pour fonctionner, l'application a besoin que le langage [ruby](https://www.ruby-lang.org/fr/documentation/installation/) soit correctement installé sur la machine.
 
-## Utilisation {#utilisation}
+<a name="utilisation"></a>
+
+## Utilisation
 
 * Mettre des lettres de motivations dans le dossier `originales`. Elles doivent se trouver au format `.doc`, `.docx` ou `.odt` (LibreOffice) (note : elles peuvent se trouver dans des sous-dossiers du dossier `originales`),
 
@@ -26,7 +30,9 @@ Pour fonctionner, l'application a besoin que le langage [ruby](https://www.ruby-
 
 * ouvrir la page `LM_BUILDER.HTML` dans un navigateur et constuire sa lettre de motivation (cf. ci-dessous).
 
-## Construction de la lettre (de motivation ou autre) {#build_letter}
+<a name="build_letter"></a>
+
+## Construction de la lettre (de motivation ou autre)
 
 « Construire une lettre » consiste à choisir des paragraphes par rapport à des exemples de paragraphes, en différentes versions (rassemblées par proximités) et à les agencer dans l'ordre le plus pertinent.
 
@@ -44,7 +50,9 @@ Choisir le paragraphe voulu — référent ou similaire — et le glisser à l
 
 Dans la lettre — la colonne gauche — on peut modifier l'ordre des paragraphes simplement en les déplaçant à la souris.
 
-## Filtre des paragraphes {#filtre_paragraphes}
+<a name="filtre_paragraphes"></a>
+
+## Filtre des paragraphes
 
 On peut filtrer les paragraphes afin de se concentrer sur ceux qu'on cherche à l'aide du champ de recherche placé au-dessus de la liste des paragraphes.
 
@@ -54,13 +62,17 @@ On peut filtrer les paragraphes afin de se concentrer sur ceux qu'on cherche à 
 
 Pour réafficher tous les paragraphes, soit faire une recherche sur un texte vide, soit cliquer le bouton "Reset".
 
-## Récupération du texte final de la lettre {#recup_texte_final}
+<a name="recup_texte_final"></a>
+
+## Récupération du texte final de la lettre
 
 Pour récupérer le texte de la lettre finale, il suffit de cliquer sur le bouton "Copier \[Texte\]" en haut de la lettre (colonne gauche).
 
 Si votre ordinateur/navigateur le permet, le texte sera entièrement copié dans le presse-papier et vous pourrez le copier où vous voulez. Si votre navigateur est trop ancien, le texte sera placé dans un champ de saisie que vous pourrez copier-coller de la même manière.
 
-## Travail de la lettre sur plusieurs jours {#work_several_days}
+<a name="work_several_days"></a>
+
+## Travail de la lettre sur plusieurs jours
 
 Si vous voulez travailler la lettre sur plusieurs jours, sans avoir à la recontruire chaque fois, voici la démarche à suivre :
 
@@ -73,13 +85,17 @@ Lorsque vous rechargerez la page `LM_BUILDER.HTML` à votre prochaine session, v
 
 > Note : après avoir travaillé une lettre, vous pouvez mettre de côté cette liste d'identifiants de paragraphes, en indiquant à quelle lettre ça correspond, pour repartir de ce modèle de lettre une prochaine fois, simplement en copiant-collant cette liste au bout de `const CURRENT_LM = ` !
 
-## Indice/pourcentage de similarité {#similarite}
+<a name="similarite"></a>
+
+## Indice/pourcentage de similarité
 
 Lorsque vous cliquez sur un paragraphe référent (liste centrale), vous affichez les paragraphes similaires dans la colonne droite (s'il y en a). Sur ces paragraphes similaires, en haut à droite, vous trouvez un *indice/pourcentage de similarité*.
 
 Plus cet indice se rapproche de `100` (« 100 % ») et plus le paragraphe est proche, identique, au paragraphe référent. Inversement, plus il est petit et moins le paragraphe est similaire à son référent, plus c'est un paragraphe différent.
 
-## Modification des paragraphes {#modify_paragraphs}
+<a name="modify_paragraphs"></a>
+
+## Modification des paragraphes
 
 Les paragraphes peuvent être modifiés, détruits ou remplacés dans le fichier `data_paragraphes.yml` à la racine du dossier. Pour modifier un texte d'un paragraphe, il suffit de… modifier ce texte dans ce fichier.
 
@@ -89,7 +105,7 @@ Attention, ce faisant, de ne pas corrompre les données. Le mieux, en l'occurenc
 
 Après toute modification, cependant, il ne faut pas oublier de relancer le script `runner.rb` pour actualiser les résultats : `ruby /path/to/runner.rb` dans votre console.
 
-<a name="lettres_traiteds"/>
+<a name="lettres_traiteds"></a>
 
 ## Les lettres traitées
 
