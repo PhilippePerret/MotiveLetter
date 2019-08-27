@@ -7,6 +7,7 @@ Créée pour Marion.
 * [Pré-requis](#prerequis)
 * [Utilisation](#utilisation)
 * [Construction de la lettre (de motivation ou autre)](#build_letter)
+* [Filtre des paragraphes](#filtre_paragraphes)
 * [Récupération du texte final de la lettre](#recup_texte_final)
 * [Travail de la lettre sur plusieurs jours](#work_several_days)
 * [Indice/pourcentage de similarité](#similarite)
@@ -42,6 +43,16 @@ Commencer par choisir un paragraphe référent en le sélectionnant à la souris
 Choisir le paragraphe voulu — référent ou similaire — et le glisser à la souris dans la colonne de la lettre.
 
 Dans la lettre — la colonne gauche — on peut modifier l'ordre des paragraphes simplement en les déplaçant à la souris.
+
+## Filtre des paragraphes {#filtre_paragraphes}
+
+On peut filtrer les paragraphes afin de se concentrer sur ceux qu'on cherche à l'aide du champ de recherche placé au-dessus de la liste des paragraphes.
+
+* Cette recherche se fait toujours sans tenir compte de la casse ("VERSION" cherché recherchera aussi "version" et "VersioN").
+
+* Cette recherche se fait par expression régulière. C'est-à-dire que <code>trav(ail|aux)</code> cherchera "travail" et "travaux", <code>expériences?</code> recherchera "expérience" et "expériences". Pour chercher un "?" ou "." ou un "\*", il faut les "échapper" : <code>\?</code>, <code>\.</code> ou <code>\\\*</code>.
+
+Pour réafficher tous les paragraphes, soit faire une recherche sur un texte vide, soit cliquer le bouton "Reset".
 
 ## Récupération du texte final de la lettre {#recup_texte_final}
 
