@@ -50,7 +50,7 @@ On peut filtrer les paragraphes afin de se concentrer sur ceux qu'on cherche à 
 
 * Cette recherche se fait toujours sans tenir compte de la casse ("VERSION" cherché recherchera aussi "version" et "VersioN").
 
-* Cette recherche se fait par expression régulière. C'est-à-dire que <code>trav(ail|aux)</code> cherchera "travail" et "travaux", <code>expériences?</code> recherchera "expérience" et "expériences". Pour chercher un "?" ou "." ou un "\*", il faut les "échapper" : <code>\?</code>, <code>\.</code> ou <code>\\\*</code>.
+* Cette recherche se fait par expression régulière. C'est-à-dire que <code>trav(ail|aux)</code> cherchera "travail" et "travaux", <code>expériences?</code> recherchera "expérience" et "expériences". Pour chercher un "?" ou "." ou un "\*", il faut les "échapper" : <code>\\\?</code>, <code>\\\.</code> ou <code>\\\*</code>.
 
 Pour réafficher tous les paragraphes, soit faire une recherche sur un texte vide, soit cliquer le bouton "Reset".
 
