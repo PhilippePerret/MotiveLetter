@@ -43,8 +43,6 @@ TEMPLATE_HTML = <<-HTML
     __CSS__
   </head>
   <body>
-
-
     <section id="section-lettre">
       <div id="boutons-lettre">
         <span id="copier">Copier</span>
@@ -83,7 +81,8 @@ TEMPLATE_HTML = <<-HTML
 
 
     __SCRIPTS__
-
+    <script type="text/javascript" src="js/_current_lm_.js"></script>
+    
   </body>
 </html>
 HTML

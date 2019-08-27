@@ -10,8 +10,24 @@ const LM = {
 , add(ui){
     const par_id = parseInt($(ui.helper).data('id'),10)
     const par = Paragraph.get(par_id)
-    UI.lettre.append(par.div)
-    par.div.draggable({disabled:true})
+    this.addInDom(par)
+  }
+
+, addInDom(parag){
+    console.log("Ajouter le paragraphe ", parag.jqObj)
+    UI.lettre.append(parag.jqObj)
+  }
+
+  /**
+    Méthode appelée au chargement de l'application qui regarde si une donnée
+    `CURRENT_LM` existe, qui contiendrait les identifiants des paragraphes de
+    la lettre courante. Si elle existe, la méthode "reconstruit" la lettre à
+    partir de ces identifiants
+  **/
+, prepare(){
+    console.log("-> prepare", CURRENT_LM)
+    if ( 'undefined' === typeof CURRENT_LM ) return
+    CURRENT_LM.forEach( paragId => this.addInDom(Paragraph.get(paragId)))
   }
 
   /**
@@ -30,9 +46,17 @@ const LM = {
       contenu = contenu.join(RC+RC)
       confMsg = "La lettre de motivation"
     }
+
+    // Si on ne possède pas les droits, on place le texte dans un
+    // textarea qu'on sélectionne et qu'on copie.
+    UI.clipboardField.val(contenu)
+    UI.clipboardField.show().focus().select()
+    $('button#btn-toggle-clipboard-field').show()
+    document.execCommand('copy');
+
     navigator.permissions.query({name: "clipboard-write"}).then(res => {
-      // if (res.state == "granted" || res.state == "prompt") {
-      if (false) {
+      if (res.state == "granted" || res.state == "prompt") {
+      // if (false) {
         if (navigator.clipboard.writeText){
           navigator.clipboard.writeText(contenu).then(function(){
             my.confirmCopyInClipboard(confMsg)
@@ -43,12 +67,6 @@ const LM = {
 
         }
       } else {
-        // Si on ne possède pas les droits, on place le texte dans un
-        // textarea qu'on sélectionne et qu'on copie.
-        UI.clipboardField.val(contenu)
-        UI.clipboardField.show().focus().select()
-        $('button#btn-toggle-clipboard-field').show()
-        document.execCommand('copy');
         my.confirmCopyInTextarea(confMsg)
       }
     });
