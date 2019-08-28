@@ -60,13 +60,14 @@ class Paragraph {
           , count: 0
         }})
       }
+      // console.log("Ajout du paragraphe #%d au groupe d'affinité #%d", parag.id, parag.grpAffinite)
       my.byAffinites[parag.grpAffinite].items.push(parag)
       my.byAffinites[parag.grpAffinite].count ++;
       // Est-ce le référent ? On le reconnait au fait que sa similarité est de
       // 100. Si c'est le cas, on l'enregistre comme référente et on l'affiche
       // dans la page.
       if ( parag.similarite === 100 ) {
-        my.byAffinites[parag.grpAffinite].referent = parag;
+        my.byAffinites[parag.grpAffinite].referent = parag ;
       }
     })
 

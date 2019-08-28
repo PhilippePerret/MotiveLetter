@@ -23,7 +23,7 @@ class LMFile
     # Toutes les lettres de motivation
     def all_files
       @all_files ||= begin
-        Dir["#{folder}/**/*.docx"].collect do |fpath|
+        Dir["#{folder}/**/*.{doc,docx,odt}"].collect do |fpath|
           affixe = File.basename(fpath,File.extname(fpath)).downcase
           next if affixe === 'annonce' || affixe.match('~')
           @nombre_fichiers += 1
@@ -51,6 +51,7 @@ class LMFile
     def report
       puts "Nombre dossiers traités : #{nombre_dossiers}"
       puts "Nombre de fichiers      : #{nombre_fichiers}"
+      puts "Nombre de paragraphes   : #{DataParagFile.data.count}"
     end
 
     # Dossier contenant toutes les lettres de motivation
@@ -93,8 +94,8 @@ class LMFile
 
   # Boucle sur tous les paragraphes du fichier
   def each_paragraphe
-    paragraphes.each do |paragraphe|
-      yield paragraphe
+    paragraphes.each do |parag|
+      yield parag
     end
   end
 

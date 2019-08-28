@@ -35,8 +35,11 @@ class << self
   # On transforme tous les paragraphes en instance, comme s'ils venaient
   # des fichiers.
   def traiteDataInit
-    YAML.load_file(path).each do |dparag|
-      # puts "dparag:#{dparag.inspect}"
+    initData = YAML.load_file(path)
+    # On détruit tout de suite le fichier parce que des éléments devront
+    # être ajoutés au cours du traitement.
+    File.unlink(path)
+    initData.each do |dparag|
       parag = Paragraph.new(dparag[:contenu], dparag)
       parag.treate
     end

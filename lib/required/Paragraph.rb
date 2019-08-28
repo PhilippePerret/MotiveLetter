@@ -29,7 +29,8 @@ class Paragraph
         return nil # On doit exclure ce paragraphe
       end
 
-      longueur_paragraphe = iparagraphe.contenu.length
+      longueur_paragraphe = iparagraphe.longueurPourSimilarite
+      # puts "Longueur de #{iparagraphe.contenu} : #{longueur_paragraphe}"
 
       # Pour conserver la meilleure proximité possible
       best_current_similarite = 0
@@ -83,7 +84,7 @@ class Paragraph
       else
         # <= Aucune affinité n'a été trouvée
         # => On crée un nouveau paragraphe de référence
-        @tables_mots.merge!(iparagraphe.id => {mots: iparagraphe.table_mots, contenu: iparagraphe.contenu, longueur: iparagraphe.contenu.length})
+        @tables_mots.merge!(iparagraphe.id => {mots:iparagraphe.table_mots, contenu:iparagraphe.contenu, longueur:iparagraphe.longueurPourSimilarite})
         return [iparagraphe.id, SIMILARITE_DEFAULT]
       end
 
@@ -97,14 +98,12 @@ class Paragraph
   # Lorsqu'il vient d'une lettre de motivation, seul le contenu est défini
   # Dans le cas contraire, +data+ contient les données initiales, dont l'id.
   def initialize contenu, data = nil
-    @contenu  = contenu
+    @contenu  = contenu.strip
     if data.nil?
       @id = self.class.newId
     else
       @id = data[:id]
-      if @id > Paragraph.lastId
-        Paragraph.lastId= @id
-      end
+      Paragraph.lastId= @id if @id > Paragraph.lastId
     end
   end
 
@@ -145,11 +144,21 @@ class Paragraph
     }
   end
 
+  # Retourne la "longueur pour similarité", c'est-à-dire la longueur du
+  # paragraphe qui sera comparée à la longueur des autres paragraphes proches
+  # pour savoir à quel point ils sont proches.
+  def longueurPourSimilarite
+    @longueurPourSimilarite ||= begin
+      contenu.gsub(/[^a-zA-Z0-9]/,'').length
+    end
+  end
+
   def table_mots
     @table_mots ||= begin
       h = {}
       mots.each do |m|
         next if m.length < 3
+        m = m.downcase
         h.key?(m) || h.merge!(m => 0)
         h[m] += 1
       end
