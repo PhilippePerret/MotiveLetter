@@ -5,8 +5,11 @@ data_paragraphes.yml et qui actualise ensuite la liste js.
 =end
 require_relative 'xrequired'
 
+ADD_IF_GROUPE_AFFINITE = true
+CONFIRMED = false
 
-LIST_REMOVED = []
+
+LIST_REMOVED = [117, 119, 640, 1504, 1538, 1500, 1462, 1631, 1630, 1632, 1624, 1635, 1619, 1637, 1617, 1441, 1413, 1439, 1418, 1414, 1398, 1409, 1395, 1404, 1393, 1394, 1380, 1391, 1384, 1368, 1372, 1379, 1371, 1370, 1366, 1367, 1365, 1364, 1360, 1363, 312, 1361, 1359, 1358, 808, 1356, 1357, 1355, 1354, 1268, 1295, 1293, 1292, 1291, 1290, 1288, 1283, 1282, 1281, 1280, 1279, 1277, 1278, 1274, 1273, 1188, 1284, 1270, 1265, 1286, 1272]
 
 nombre_a_removed = LIST_REMOVED.count
 
@@ -30,10 +33,15 @@ data_paragraphs_yaml.each do |dparag|
     puts "PARAGRAPHE ##{dparag[:id]} : #{dparag[:contenu]}"
     grp_id = dparag[:grpAffinite]
     puts "PARAGRAPHE ##{grp_id} : #{DATA_PARAGRAPHES[grp_id][:contenu]}"
-    error "Le paragraphe ##{dparag[:id]} va se retrouver sans groupe d'affinité, car il appartient au groupe ##{dparag[:grpAffinite]} dont le référent va être détruit."
-    error "Je ne peux pas procéder à la destruction."
-    puts "\n\n"
-    exit
+    if ADD_IF_GROUPE_AFFINITE
+      LIST_REMOVED << dparag[:id]
+      notice "--- paragraphe ##{dparag[:id]} ajouté car il appartient au groupe ##{dparag[:grpAffinite]} dont le référent va être détruit."
+    else
+      error "Le paragraphe ##{dparag[:id]} va se retrouver sans groupe d'affinité, car il appartient au groupe ##{dparag[:grpAffinite]} dont le référent va être détruit."
+      error "Je ne peux pas procéder à la destruction."
+      puts "\n\n"
+      exit
+    end
   end
 end
 
@@ -63,6 +71,11 @@ nombre_after = data_paragraphs_yaml.count
 # end
 
 puts "Nombre de paragraphes restants : #{nombre_after}"
+
+if ADD_IF_GROUPE_AFFINITE && !CONFIRMED
+  puts "Il faut confirmer les ajouts puis mettre CONFIRMED à true pour procéder réellement à l'opération."
+  exit 0
+end
 
 backup_paragraphes_yaml
 File.open(PARAGS_YAML_DATA_PATH,'wb'){|f| f.write YAML.dump(data_paragraphs_yaml)}

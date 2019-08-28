@@ -5,9 +5,9 @@ def data_paragraphs_yaml
 end
 
 def backup_paragraphes_yaml
-  FileUtils.mv(PARAGS_YAML_DATA_PATH, "#{PARAGS_YAML_DATA_PATH}.bckup.yml")
+  FileUtils.mv(PARAGS_YAML_DATA_PATH, "#{PARAGS_YAML_DATA_PATH}.bckup.yml", {force:true})
 end
 
 def backup_paragraphes_js
-  FileUtils.mv(PARAGS_JS_DATA_PATH, "#{PARAGS_JS_DATA_PATH}.bckup.js")
+  FileUtils.mv(PARAGS_JS_DATA_PATH, "#{PARAGS_JS_DATA_PATH}.bckup.js", {force:true})
 end
