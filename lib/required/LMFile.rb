@@ -151,7 +151,7 @@ class LMFile
   end
   # Code simple texte du fichier
   def code
-    @code ||= `textutil -stdout -convert txt "#{path}"`
+    @code ||= `textutil -stdout -convert txt "#{path}"`.force_encoding('utf-8')
   end
 
 end #/LMFile
